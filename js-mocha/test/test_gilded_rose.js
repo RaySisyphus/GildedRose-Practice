@@ -35,14 +35,14 @@ describe("Gilded Rose", function() {
         new Item('Aged Brie',0,50),
         new Item('Aged Brie',0,49),
         new Item('Backstage passes to a TAFKAL80ETC concert',1,50),
-        new Item('Backstage passes to a TAFKAL80ETC concert',6,50)
+        new Item('Backstage passes to a TAFKAL80ETC concert',6,50),
+        new Item('Backstage passes to a TAFKAL80ETC concert',1,49),
+        new Item('Backstage passes to a TAFKAL80ETC concert',6,48)
       ]);
     const items = gildedRose.updateQuality();
-    expect(items[0].quality).to.equal(50)
-    expect(items[1].quality).to.equal(50)
-    expect(items[2].quality).to.equal(50)
-    expect(items[3].quality).to.equal(50)
-    expect(items[4].quality).to.equal(50)
+    items.forEach((item)=>{
+      expect(item.quality).to.equal(50);
+    })
   })
 
   it("BackStage pass incrases in quality by 2 within ten days of sell by date", function(){
@@ -83,10 +83,9 @@ describe("Gilded Rose", function() {
       new Item('Conjured - Shield',0,1)
     ]);
     const items = gildedRose.updateQuality();
-    expect(items[0].quality).to.equal(0)
-    expect(items[1].quality).to.equal(0)
-    expect(items[1].quality).to.equal(0)
-    expect(items[1].quality).to.equal(0)
+    items.forEach((item)=>{
+      expect(item.quality).to.equal(0)
+    })
   })
 
   /*it("Conjured Items degrade at twice the rate", function(){

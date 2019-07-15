@@ -11,53 +11,46 @@ class Shop {
     this.items = items;
   }
   updateQuality() {
-    this.items.forEach((item)=>{
+    this.items.forEach((item) => {
       switch (item.name) {
         case ('Aged Brie'):
           item.sellIn--;
-          if (item.sellIn < 0 && item.quality < 49) {
-            item.quality += 2;
+          if (item.sellIn > 0) {
+            item.quality = Math.min(item.quality + 1, 50);
           }
           else {
-            if (item.quality < 50) {
-              item.quality += 1;
-            }
+              item.quality = Math.min(item.quality + 2, 50);
           }
           break;
         case ('Backstage passes to a TAFKAL80ETC concert'):
           item.sellIn--;
-          if (item.quality < 50) {
-            if (item.sellIn < 5
-            ) {
-              item.quality += 3;
-            }
-            else if (item.sellIn < 10
-            ) {
-              item.quality += 2;
-            }
-            else {
-              item.quality++;
-            }
-          }
           if (item.sellIn < 0) {
             item.quality = 0;
+          }
+          else if (item.quality < 50) {
+            if (item.sellIn < 5) {
+              item.quality = Math.min(item.quality + 3, 50);
+            }
+            else if (item.sellIn < 10) {
+              item.quality = Math.min(item.quality + 2, 50);
+            }
+            else {
+              item.quality = Math.min(item.quality + 1, 50);
+            }
           }
           break;
         case ('Sulfuras, Hand of Ragnaros'):
           break;
         default:
           item.sellIn--;
-          if (item.sellIn < 0 && item.quality > 1) {
-            item.quality -= 2;
+          if (item.sellIn > 0) {
+            item.quality = Math.max(item.quality - 1, 0);
           }
-          else{
-            if(item.quality > 0){
-              item.quality -= 1;
-            }
+          else {
+            item.quality = Math.max(item.quality - 2, 0);
           }
           break;
       }
-
     })
     return this.items;
   }
