@@ -13,14 +13,11 @@ class Shop {
   updateQuality() {
     this.items.forEach((item) => {
       switch (item.name) {
+        case ('Sulfuras, Hand of Ragnaros'):
+          break;
         case ('Aged Brie'):
           item.sellIn--;
-          if (item.sellIn > 0) {
-            item.quality = Math.min(item.quality + 1, 50);
-          }
-          else {
-            item.quality = Math.min(item.quality + 2, 50);
-          }
+          item.quality = Math.min(item.quality + (item.sellIn > 0 ? 1 : 2), 50);
           break;
         case ('Backstage passes to a TAFKAL80ETC concert'):
           item.sellIn--;
@@ -39,25 +36,13 @@ class Shop {
             }
           }
           break;
-        case ('Sulfuras, Hand of Ragnaros'):
-          break;
         default:
           item.sellIn--;
-          if (item.name.substring(0, 8) == "Conjured") {
-            if (item.sellIn > 0) {
-              item.quality = Math.max(item.quality - 2, 0);
-            }
-            else {
-              item.quality = Math.max(item.quality - 4, 0);
-            }
+          if (item.name.substring(0, 11) == "Conjured - ") {
+            item.quality = Math.max(item.quality - (item.sellIn > 0 ? 2 : 4), 0)
           }
           else {
-            if (item.sellIn > 0) {
-              item.quality = Math.max(item.quality - 1, 0);
-            }
-            else {
-              item.quality = Math.max(item.quality - 2, 0);
-            }
+            item.quality = Math.max(item.quality - (item.sellIn > 0 ? 1 : 2), 0);
           }
           break;
       }
