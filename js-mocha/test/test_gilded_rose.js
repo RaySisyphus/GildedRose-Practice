@@ -85,7 +85,7 @@ describe("Gilded Rose", function() {
     })
   })
 
-  /*it("Conjured Items degrade at twice the rate", function(){
+  it("Conjured Items degrade at twice the rate", function(){
     const gildedRose = new Shop([ 
       new Item('Conjured - Spear',10,10),
       new Item('Conjured - Axe',0,10),
@@ -93,6 +93,6 @@ describe("Gilded Rose", function() {
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(8)
     expect(items[1].quality).to.equal(6)
-  })*/
+  })
 
 });
