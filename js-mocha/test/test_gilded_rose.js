@@ -2,18 +2,14 @@ var {expect} = require('chai');
 var {Shop, Item} = require('../src/gilded_rose.js');
 describe("Gilded Rose", function() {
 
-  it("should foo", function() {
-    const gildedRose = new Shop([ new Item("fixme", 0, 0) ]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).to.equal("fixme");
-  });
-
   it("Sulfuras does not degrade in quality", function(){
-    const gildedRose = new Shop([ new Item('Sulfuras, Hand of Ragnaros',0,50)]);
+    const gildedRose = new Shop([ 
+      new Item('Sulfuras, Hand of Ragnaros',0,50),
+      new Item('Sulfuras, Hand of Ragnaros',3,50)
+    ]);
     let items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(50);
-    items = gildedRose.updateQuality();
-    expect(items[0].quality).to.equal(50);
+    expect(items[1].quality).to.equal(50);
   })
 
   it("Aged Brie Increases in quality over time", function(){
@@ -36,8 +32,9 @@ describe("Gilded Rose", function() {
         new Item('Aged Brie',0,49),
         new Item('Backstage passes to a TAFKAL80ETC concert',1,50),
         new Item('Backstage passes to a TAFKAL80ETC concert',6,50),
+        new Item('Backstage passes to a TAFKAL80ETC concert',15,50),
         new Item('Backstage passes to a TAFKAL80ETC concert',1,49),
-        new Item('Backstage passes to a TAFKAL80ETC concert',6,48)
+        new Item('Backstage passes to a TAFKAL80ETC concert',6,48),
       ]);
     const items = gildedRose.updateQuality();
     items.forEach((item)=>{
